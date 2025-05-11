@@ -32,6 +32,9 @@ function isActiveForm($formName, $activeForm) {
 
   <div class="container">
     <div class="form-box <?= isActiveForm('login', $activeForm); ?>" id="login-form">
+      <div class="logo">
+        <img src="Xobo-Logo.jpeg" alt="">
+      </div>
       <form action="login_register.php" method="post">
         <h2>Login</h2>
         <?= showError($error['login']); ?>
@@ -43,6 +46,9 @@ function isActiveForm($formName, $activeForm) {
     </div>
 
     <div class="form-box <?= isActiveForm('register', $activeForm); ?>" id="register-form">
+      <div class="logo">
+        <img src="Xobo-Logo.jpeg" alt="">
+      </div>
       <form action="login_register.php" method="post">
         <h2>Register</h2>
         <?= showError($error['register']); ?>

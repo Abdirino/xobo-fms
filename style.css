@@ -17,6 +17,14 @@ body {
 .container {
   margin: 0 15px;
 }
+.logo{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logo img{
+  width: 90px; height: 30px;
+}
 .form-box {
   width: 100%;
   max-width: 450px;
