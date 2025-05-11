@@ -1,6 +1,6 @@
 <?php 
 session_start();
-require_once 'config.php';
+require_once 'connect_db.php';
 
 if (isset($_POST['register'])) {
     $name = $_POST['name'];
@@ -10,7 +10,7 @@ if (isset($_POST['register'])) {
 
     $checkEmail = $conn->query("SELECT email FROM users WHERE email = '$email'");
     if ($checkEmail->num_rows > 0) {
-        $_SESSION['register_error'] = 'Email is already registered';
+        $_SESSION['register_error'] = 'Email is already registered!';
         $_SESSION['active_form'] = 'register';
     } else {
         $conn->query("INSERT INTO users (name, email, password, role) VALUES ('$name', '$email', '$password', '$role')");
@@ -21,7 +21,7 @@ if (isset($_POST['register'])) {
 
 }
 
-if (isset($_POST[''])) {
+if (isset($_POST['login'])) {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
@@ -44,6 +44,7 @@ if (isset($_POST[''])) {
     $_SESSION['login_error'] = 'incorrect email or password';
     $_SESSION['active_form'] = 'login';
     header("Location: index.php");
+    exit();
 }
 
 
