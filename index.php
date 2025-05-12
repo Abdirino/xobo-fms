@@ -1,11 +1,13 @@
 <?php 
 
+// this is the landing page with login and register logic. 
 session_start();
 
 $errors = [
   'login' => $_SESSION['login_error'] ?? '',
   'register' => $_SESSION['register_error'] ?? ''
 ];
+
 
 $activeForm = $_SESSION['active_form'] ?? 'login';
 
@@ -31,6 +33,7 @@ function isActiveForm($formName, $activeForm) {
 </head>
 <body>
 
+<!-- logic is in the login_register.php as redirected -->
   <div class="container">
     <div class="form-box <?= isActiveForm('login', $activeForm); ?>" id="login-form">
       <div class="logo">
