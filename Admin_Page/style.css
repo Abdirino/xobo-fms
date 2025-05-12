@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+*, a, li{
+    margin: 0; padding: 0;
+    box-sizing: border-box;
+    font-family: "Nunito", sans-serif;
+    text-decoration: none;
+    list-style: none;
+}
+
+.wrapper{
+    display: flex;
+}
+.main{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    transition: all 0.25s ease-in-out;
+    background-color: #fff;
+}
+#sidebar{
+    width: 90px;
+    min-width: 90px;
+    transition: all 0.25s ease-in-out;
+    background-color: #0b0f19;
+    display: flex;
+    flex-direction: column;
+}
+#sidebar.expand{
+    width: 260px;
+    min-width: 260px;
+}
+
+#sidebar:not(.expand) .sidebar-logo, 
+#sidebar:not(.expand) a.sidebar-link span{
+    display: none;
+}
+.sidebar-logo img {
+    width: 90px; height: 20px;
+    padding: 20px;
+    /* background: #fff; */
+}
+
+.toggle-btn{
+    width: 45px;
+    height: 35px;
+    color: #fff;
+    border-radius: 0.425rem;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #323c55;
+}
+
+.toggle-btn i {
+    color: #fff;
+}
+
+#sidebar.expand .sidebar-logo,
+#sidebar.expand a.sidebar-link span{
+    animation: fadeIn .25s ease;
+}
+
+@keyframes fadeIn {
+    0%{opacity:0}
+    100%{opacity: 1;}
+}
+
+.sidebar-logo a{
+    color: #fff;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.sidebar-nav{
+    padding: 0.7rem;
+    flex: 11 auto;
+    z-index: 10;
+}
+
+a.sidebar-link{
+    padding: .625rem 1.625rem;
+    color: #fff;
+    display: block;
+    white-space: nowrap;
+    font-weight: 700;
+    border-left: 3px solid transparent;
+}
+.sidebar-link i{
+    font-size: 1.1rem;
+    margin-right: .75rem;
+}
+
+a.sidebar-link:hover{
+    background-color: rgba(48, 48, 48, 0.75);
+    border-left: 3px solid #3b7ddd;
+}
+.sidebar-footer{
+    margin-bottom: 35px;
+}
