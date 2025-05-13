@@ -38,7 +38,7 @@ if (isset($_POST['login'])) {
             if ($user['role'] === 'admin') {
                 header("Location: Admin_Page/admin.php");
             } else {
-                header("Location: User_Page/index.php");
+                header("Location: User_Page/user.php");
             }
             exit();
         }

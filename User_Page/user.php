@@ -16,7 +16,7 @@ if (!isset($_SESSION['email'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="website" type="png" href="Xobo-Logo.jpeg">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <title>Admin Dashboard</title>
+    <title>User Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
@@ -45,14 +45,8 @@ if (!isset($_SESSION['email'])) {
 
                 <li class="sidebar-item">
                     <a href="" class="sidebar-link">
-                        <i class='bx bxs-user-detail'></i>
-                        <span>Manage Users</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="" class="sidebar-link">
-                        <i class='bx bxs-hdd'></i>
-                        <span>Files Repository</span>
+                        <i class='bx bx-file'></i> 
+                        <span>My Files</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
@@ -63,8 +57,8 @@ if (!isset($_SESSION['email'])) {
                 </li>
                 <li class="sidebar-item">
                     <a href="" class="sidebar-link">
-                        <i class='bx bxl-blogger'></i>
-                        <span>Audit Logs</span>
+                        <i class='bx bx-share'></i> 
+                        <span>Share with me</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
@@ -81,8 +75,8 @@ if (!isset($_SESSION['email'])) {
                 </li>
                 <li class="sidebar-item">
                     <a href="" class="sidebar-link">
-                        <i class='bx bxs-cog'></i>
-                        <span>Setting</span>
+                        <i class='bx bx-history'></i>
+                        <span>File History</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
@@ -121,9 +115,9 @@ if (!isset($_SESSION['email'])) {
 
             <div class="box">
                 <h1>Welcome, <span><?= $_SESSION['name']; ?></span></h1>
-                <p>This is the admin page</p>
+                <p>This is the user page</p>
             </div>
-
+            
             <div class="col-12 col-md-5">
                 <h3 class="fw-bold fs-4 my-3">
                     Report Overview
