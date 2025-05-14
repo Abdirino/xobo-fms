@@ -37,7 +37,7 @@ if (!isset($_SESSION['email'])) {
             <ul class="sidebar-nav">
 
                 <li class="sidebar-item">
-                    <a href="" class="sidebar-link">
+                    <a href="/" class="sidebar-link">
                         <i class='bx bxs-dashboard'></i>
                         <span>Dashboard</span>
                     </a>
@@ -56,7 +56,7 @@ if (!isset($_SESSION['email'])) {
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="" class="sidebar-link">
+                    <a href="../Upload/upload.php" class="sidebar-link">
                         <i class='bx bxs-file-import'></i>
                         <span>Upload File</span>
                     </a>
@@ -116,7 +116,7 @@ if (!isset($_SESSION['email'])) {
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item dropdown">
                             <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
-                                <img src="../profile-img.jpeg" class="avatar img-fluid" alt="">
+                                <img src="../Images/profile-img.jpeg" class="avatar img-fluid" alt="">
                             </a>
                             <div class="dropdown-menu dropdown-menu-end rounded-0 border-0 shadow mt-3">
                                 <a href="#" class="dropdown-item">
