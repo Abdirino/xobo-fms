@@ -1,11 +1,9 @@
 <?php
-
 session_start();
 if (!isset($_SESSION['email'])) {
     header("Location: index.php");
     exit();
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -37,32 +35,31 @@ if (!isset($_SESSION['email'])) {
             <ul class="sidebar-nav">
 
                 <li class="sidebar-item">
-                    <a href="/" class="sidebar-link">
+                    <a href="admin.php" class="sidebar-link">
                         <i class='bx bxs-dashboard'></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
-
                 <li class="sidebar-item">
-                    <a href="" class="sidebar-link">
+                    <a href="admin.php?manage_users" class="sidebar-link">
                         <i class='bx bxs-user-detail'></i>
                         <span>Manage Users</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="" class="sidebar-link">
+                    <a href="admin.php?files_repository" class="sidebar-link">
                         <i class='bx bxs-hdd'></i>
                         <span>Files Repository</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="../Upload/upload.php" class="sidebar-link">
+                    <a href="admin.php?upload" class="sidebar-link">
                         <i class='bx bxs-file-import'></i>
                         <span>Upload File</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="" class="sidebar-link">
+                    <a href="admin.php?audit_logs" class="sidebar-link">
                         <i class='bx bxl-blogger'></i>
                         <span>Audit Logs</span>
                     </a>
@@ -137,136 +134,152 @@ if (!isset($_SESSION['email'])) {
                     </ul>
                 </div>
             </nav>
-
             <main class="content px-3 py-4">
                 <div class="container-fluid">
-                    <div class="mb-3">
-                        <h1 class="mb-2">Welcome, <span><?= $_SESSION['name']; ?></span></h1>
-                        <h3 class="fw-bold fs-4 mb-3">
-                            Admin Dashboard
-                        </h3>
-                        <div class="row">
-                            <div class="col-12 col-md-4">
-                                <div class="card shadow">
-                                    <div class="card-body py-4">
-                                        <h6 class="mb-2 fw-bold">
-                                            Member Progress
-                                        </h6>
-                                        <p class="fw-bold">
-                                            $89,189
-                                        </p>
-                                        <div class="mb-0">
-                                            <span class="badge text-success me-2">
-                                                +9.0%
-                                            </span>
-                                            <span class="fw-bold">
-                                                Since Last Month
-                                            </span>
+                    <?php
+                    if (isset($_GET['upload'])) {
+                        include('../Upload/upload.php');
+                    } elseif (isset($_GET['manage_users'])) {
+                        include('manage_users.php');
+                    } elseif (isset($_GET['files_repository'])) {
+                        include('files_repository.php');
+                    } elseif (isset($_GET['audit_logs'])) {
+                        include('audit_logs.php');
+                    } elseif (isset($_GET['reports'])) {
+                        include('reports.php');
+                    } elseif (isset($_GET['settings'])) {
+                        include('settings.php');
+                    } elseif (isset($_GET['profile'])) {
+                        include('profile.php');
+                    } else {
+                        ?>
+                        <div class="mb-3">
+                            <h1 class="mb-2">Welcome, <span><?= $_SESSION['name']; ?></span></h1>
+                            <h3 class="fw-bold fs-4 mb-3">
+                                Admin Dashboard
+                            </h3>
+                            <div class="row">
+                                <div class="col-12 col-md-4">
+                                    <div class="card shadow">
+                                        <div class="card-body py-4">
+                                            <h6 class="mb-2 fw-bold">
+                                                Member Progress
+                                            </h6>
+                                            <p class="fw-bold">
+                                                $89,189
+                                            </p>
+                                            <div class="mb-0">
+                                                <span class="badge text-success me-2">
+                                                    +9.0%
+                                                </span>
+                                                <span class="fw-bold">
+                                                    Since Last Month
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <div class="card shadow">
+                                        <div class="card-body py-4">
+                                            <h6 class="mb-2 fw-bold">
+                                                Member Progress
+                                            </h6>
+                                            <p class="fw-bold">
+                                                $89,189
+                                            </p>
+                                            <div class="mb-0">
+                                                <span class="badge text-success me-2">
+                                                    +9.0%
+                                                </span>
+                                                <span class="fw-bold">
+                                                    Since Last Month
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <div class="card shadow">
+                                        <div class="card-body py-4">
+                                            <h6 class="mb-2 fw-bold">
+                                                Member Progress
+                                            </h6>
+                                            <p class="fw-bold">
+                                                $89,189
+                                            </p>
+                                            <div class="mb-0">
+                                                <span class="badge text-success me-2">
+                                                    +9.0%
+                                                </span>
+                                                <span class="fw-bold">
+                                                    Since Last Month
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-12 col-md-4">
-                                <div class="card shadow">
-                                    <div class="card-body py-4">
-                                        <h6 class="mb-2 fw-bold">
-                                            Member Progress
-                                        </h6>
-                                        <p class="fw-bold">
-                                            $89,189
-                                        </p>
-                                        <div class="mb-0">
-                                            <span class="badge text-success me-2">
-                                                +9.0%
-                                            </span>
-                                            <span class="fw-bold">
-                                                Since Last Month
-                                            </span>
-                                        </div>
-                                    </div>
+
+                            <div class="row">
+                                <div class="col-12 col-md-5">
+                                    <h3 class="fw-bold fs-4 my-3">
+                                        Report Overview
+                                    </h3>
+                                    <canvas id="bar-chart-grouped" width="800" height="450"></canvas>
                                 </div>
-                            </div>
-                            <div class="col-12 col-md-4">
-                                <div class="card shadow">
-                                    <div class="card-body py-4">
-                                        <h6 class="mb-2 fw-bold">
-                                            Member Progress
-                                        </h6>
-                                        <p class="fw-bold">
-                                            $89,189
-                                        </p>
-                                        <div class="mb-0">
-                                            <span class="badge text-success me-2">
-                                                +9.0%
-                                            </span>
-                                            <span class="fw-bold">
-                                                Since Last Month
-                                            </span>
-                                        </div>
-                                    </div>
+                                <div class="col-12 col-md-7">
+                                    <h3 class="fw-bold fs-4 my-3">Users</h3>
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr class="highlight">
+                                                <th scope="col">#</th>
+                                                <th scope="col">First</th>
+                                                <th scope="col">Last</th>
+                                                <th scope="col">Handle</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <td>Mark</td>
+                                                <td>Otto</td>
+                                                <td>@mdo</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">2</th>
+                                                <td>Jacob</td>
+                                                <td>Thornton</td>
+                                                <td>@fat</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">3</th>
+                                                <td colspan="2">Larry the Bird</td>
+                                                <td>@twitter</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">4</th>
+                                                <td>Mark</td>
+                                                <td>Otto</td>
+                                                <td>@mdo</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">5</th>
+                                                <td>Jacob</td>
+                                                <td>Thornton</td>
+                                                <td>@fat</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">6</th>
+                                                <td colspan="2">Larry the Bird</td>
+                                                <td>@twitter</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="row">
-                            <div class="col-12 col-md-5">
-                                <h3 class="fw-bold fs-4 my-3">
-                                    Report Overview
-                                </h3>
-                                <canvas id="bar-chart-grouped" width="800" height="450"></canvas>
-                            </div>
-                            <div class="col-12 col-md-7">
-                                <h3 class="fw-bold fs-4 my-3">Users</h3>
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr class="highlight">
-                                            <th scope="col">#</th>
-                                            <th scope="col">First</th>
-                                            <th scope="col">Last</th>
-                                            <th scope="col">Handle</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td colspan="2">Larry the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td colspan="2">Larry the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                        </div>
-                    </div>
+                    <?php } ?>
                 </div>
             </main>
             <footer class="footer">

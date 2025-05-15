@@ -37,28 +37,33 @@ if (!isset($_SESSION['email'])) {
             <ul class="sidebar-nav">
 
                 <li class="sidebar-item">
-                    <a href="" class="sidebar-link">
+                    <a href="admin.php" class="sidebar-link">
                         <i class='bx bxs-dashboard'></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
-
                 <li class="sidebar-item">
-                    <a href="" class="sidebar-link">
-                        <i class='bx bx-file'></i>
-                        <span>My Files</span>
+                    <a href="admin.php?manage_users" class="sidebar-link">
+                        <i class='bx bxs-user-detail'></i>
+                        <span>Manage Users</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="../Upload/upload.php" class="sidebar-link">
+                    <a href="admin.php?files_repository" class="sidebar-link">
+                        <i class='bx bxs-hdd'></i>
+                        <span>Files Repository</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="admin.php?upload" class="sidebar-link">
                         <i class='bx bxs-file-import'></i>
                         <span>Upload File</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="" class="sidebar-link">
-                        <i class='bx bx-share'></i>
-                        <span>Share with me</span>
+                    <a href="admin.php?audit_logs" class="sidebar-link">
+                        <i class='bx bxl-blogger'></i>
+                        <span>Audit Logs</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
@@ -75,8 +80,8 @@ if (!isset($_SESSION['email'])) {
                 </li>
                 <li class="sidebar-item">
                     <a href="" class="sidebar-link">
-                        <i class='bx bx-history'></i>
-                        <span>File History</span>
+                        <i class='bx bxs-cog'></i>
+                        <span>Setting</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
@@ -134,6 +139,23 @@ if (!isset($_SESSION['email'])) {
 
             <main class="content px-3 py-4">
                 <div class="container-fluid">
+                    <?php
+                    if (isset($_GET['upload'])) {
+                        include('../Upload/upload.php');
+                    } elseif (isset($_GET['manage_users'])) {
+                        include('manage_users.php');
+                    } elseif (isset($_GET['files_repository'])) {
+                        include('files_repository.php');
+                    } elseif (isset($_GET['audit_logs'])) {
+                        include('audit_logs.php');
+                    } elseif (isset($_GET['reports'])) {
+                        include('reports.php');
+                    } elseif (isset($_GET['settings'])) {
+                        include('settings.php');
+                    } elseif (isset($_GET['profile'])) {
+                        include('profile.php');
+                    } else {
+                        ?>
                     <div class="mb-3">
                         <h1 class="mb-2">Welcome, <span><?= $_SESSION['name']; ?></span></h1>
                         <h3 class="fw-bold fs-4 mb-3">
@@ -203,6 +225,7 @@ if (!isset($_SESSION['email'])) {
                         </div>
 
                     </div>
+                    <?php } ?>
                 </div>
             </main>
 
