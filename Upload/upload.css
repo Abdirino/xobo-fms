@@ -1,0 +1,42 @@
+@font-face {
+  font-family: VW;
+  src: url(../Fonts/VWRegular.woff);
+}
+
+*,
+a,
+li {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: VW;
+  text-decoration: none;
+  list-style: none;
+}
+
+.container {
+  margin: 0 15px;
+}
+
+h2 {
+  font-size: 34px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background: #16234d;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #fff;
+  font-weight: 500;
+  margin-bottom: 20px;
+  transition: 0.5s;
+}
+button:hover {
+  background: #000000;
+}
