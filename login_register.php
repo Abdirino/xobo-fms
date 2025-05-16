@@ -1,7 +1,7 @@
 <?php 
 
 // this code alternates between user and admin based on the role they play in the system.
-// it alternateds the user or adminduring signup and redirects to the appropriate page whether user dashgboard or admin dashboard
+// it alternates the user or admin during signup and redirects to the appropriate page whether user dashboard or admin dashboard
 session_start();
 require_once 'connect_db.php';
 
