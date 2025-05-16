@@ -37,31 +37,31 @@ if (!isset($_SESSION['email'])) {
             <ul class="sidebar-nav">
 
                 <li class="sidebar-item">
-                    <a href="admin.php" class="sidebar-link">
+                    <a href="user.php" class="sidebar-link">
                         <i class='bx bxs-dashboard'></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="admin.php?manage_users" class="sidebar-link">
+                    <a href="user.php?manage_users" class="sidebar-link">
                         <i class='bx bxs-user-detail'></i>
                         <span>Manage Users</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="admin.php?files_repository" class="sidebar-link">
+                    <a href="user.php?files_repository" class="sidebar-link">
                         <i class='bx bxs-hdd'></i>
                         <span>Files Repository</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="admin.php?upload" class="sidebar-link">
+                    <a href="user.php?upload" class="sidebar-link">
                         <i class='bx bxs-file-import'></i>
                         <span>Upload File</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="admin.php?audit_logs" class="sidebar-link">
+                    <a href="user.php?audit_logs" class="sidebar-link">
                         <i class='bx bxl-blogger'></i>
                         <span>Audit Logs</span>
                     </a>

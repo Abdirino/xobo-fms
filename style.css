@@ -1,14 +1,17 @@
 @font-face {
-    font-family: VW;
-    src: url(/Fonts/VWRegular.woff);
+  font-family: VW;
+  src: url(Fonts/VWRegular.woff);
 }
 
-*, a, li{
-    margin: 0; padding: 0;
-    box-sizing: border-box;
-    font-family: VW;
-    text-decoration: none;
-    list-style: none;
+*,
+a,
+li {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: VW;
+  text-decoration: none;
+  list-style: none;
 }
 
 body {
@@ -16,19 +19,20 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(to right, #e2e2e2, #E9EBEF);
+  background: linear-gradient(to right, #e2e2e2, #e9ebef);
   color: #333;
 }
 .container {
   margin: 0 15px;
 }
-.logo{
+.logo {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.logo img{
-  width: 90px; height: 30px;
+.logo img {
+  width: 90px;
+  height: 30px;
 }
 .form-box {
   width: 100%;
@@ -39,15 +43,16 @@ body {
   box-shadow: 0 0 10px rgb(0, 0, 0, 0.1);
   display: none;
 }
-.form-box.active{
-    display: block;
+.form-box.active {
+  display: block;
 }
 h2 {
   font-size: 34px;
   text-align: center;
   margin-bottom: 20px;
 }
-input, select {
+input,
+select {
   width: 100%;
   padding: 12px;
   background: #eee;
@@ -61,7 +66,7 @@ input, select {
 button {
   width: 100%;
   padding: 12px;
-  background: #16234D;
+  background: #16234d;
   border-radius: 6px;
   border: none;
   cursor: pointer;
@@ -80,7 +85,7 @@ p {
   margin-bottom: 10px;
 }
 p a {
-  color: #5D2DE6;
+  color: #5d2de6;
   text-decoration: none;
 }
 p a:hover {
@@ -96,16 +101,16 @@ p a:hover {
   margin-bottom: 20px;
 }
 
-h1{
+h1 {
   font-size: 50px;
 }
-span{
+span {
   color: #7494ec;
 }
-.box p{
+.box p {
   font-size: 22px;
 }
-.box button{
+.box button {
   display: block;
   width: 300px;
   margin: 0 auto;

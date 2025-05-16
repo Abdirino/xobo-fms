@@ -37,7 +37,7 @@ function isActiveForm($formName, $activeForm) {
   <div class="container">
     <div class="form-box <?= isActiveForm('login', $activeForm); ?>" id="login-form">
       <div class="logo">
-        <img src="/Images/Xobo-Logo.jpeg" alt="">
+        <img src="Xobo-Logo.jpeg" alt="">
       </div>
       <form action="login_register.php" method="post">
         <h2>Login</h2>
