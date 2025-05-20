@@ -21,7 +21,12 @@ SET time_zone = "+00:00";
 -- Database: `xobo-file-system`
 --
 
--- --------------------------------------------------------
+-- Create database if it doesn't exist
+CREATE DATABASE IF NOT EXISTS `xobo-file-system`;
+USE `xobo-file-system`;
+
+-- Drop table if it exists to avoid duplicate errors
+DROP TABLE IF EXISTS `upload`;
 
 --
 -- Table structure for table `upload`
@@ -47,10 +52,11 @@ CREATE TABLE `upload` (
 --
 
 --
--- Indexes for table `upload`
+-- Set auto-increment for table `upload`
 --
 ALTER TABLE `upload`
-  ADD PRIMARY KEY (`id`);
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
