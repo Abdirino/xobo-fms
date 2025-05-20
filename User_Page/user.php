@@ -115,6 +115,7 @@ if (!isset($_SESSION['email'])) {
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item dropdown">
                             <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
+                                <span><?= $_SESSION['name']; ?></span>
                                 <img src="../Images/profile-img.jpeg" class="avatar img-fluid" alt="">
                             </a>
                             <div class="dropdown-menu dropdown-menu-end rounded-0 border-0 shadow mt-3">

@@ -24,7 +24,7 @@ h2 {
   margin-bottom: 20px;
 }
 
-button {
+.container .btn {
   width: 100%;
   padding: 12px;
   background: #16234d;
@@ -37,6 +37,6 @@ button {
   margin-bottom: 20px;
   transition: 0.5s;
 }
-button:hover {
+.btn:hover {
   background: #000000;
 }
