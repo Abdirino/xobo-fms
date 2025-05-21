@@ -45,8 +45,7 @@ if (!isset($_SESSION['email'])) {
                         <i class='bx bxs-user-detail'></i>
                         <span>Manage Users</span>
                     </a>
-                </li>
-                <li class="sidebar-item">
+                </li>                <li class="sidebar-item">
                     <a href="admin.php?files_repository" class="sidebar-link">
                         <i class='bx bxs-hdd'></i>
                         <span>Files Repository</span>
@@ -141,9 +140,8 @@ if (!isset($_SESSION['email'])) {
                     if (isset($_GET['upload'])) {
                         include('../Upload/upload.php');
                     } elseif (isset($_GET['manage_users'])) {
-                        include('manage_users.php');
-                    } elseif (isset($_GET['files_repository'])) {
-                        include('files_repository.php');
+                        include('manage_users.php');                    } elseif (isset($_GET['files_repository'])) {
+                        include('../Files/files.php');
                     } elseif (isset($_GET['audit_logs'])) {
                         include('audit_logs.php');
                     } elseif (isset($_GET['reports'])) {

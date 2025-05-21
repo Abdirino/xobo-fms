@@ -17,7 +17,7 @@ new Chart(document.getElementById("bar-chart-grouped"), {
           backgroundColor: "#3e95cd",
           data: [133,221,783,2478]
         }, {
-          label: "Docoment",
+          label: "Document",
           backgroundColor: "#8e5ea2",
           data: [408,547,675,734]
         }

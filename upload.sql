@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 20, 2025 at 10:05 AM
+-- Generation Time: May 20, 2025 at 12:36 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -21,30 +21,21 @@ SET time_zone = "+00:00";
 -- Database: `xobo-file-system`
 --
 
--- Create database if it doesn't exist
-CREATE DATABASE IF NOT EXISTS `xobo-file-system`;
-USE `xobo-file-system`;
-
--- Drop table if it exists to avoid duplicate errors
-DROP TABLE IF EXISTS `upload`;
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `upload`
 --
 
 CREATE TABLE `upload` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `filename` varchar(255) NOT NULL,
-  `filesize` bigint(20) NOT NULL COMMENT 'File size in bytes',
-  `filetype` varchar(100) NOT NULL COMMENT 'File MIME type',
+  `filesize` bigint(20) NOT NULL,
+  `filetype` varchar(100) NOT NULL,
   `upload_date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `user_id` int(11) DEFAULT NULL COMMENT 'Reference to user who uploaded the file',
-  `file_path` varchar(512) NOT NULL COMMENT 'Relative path to the file in storage',
-  `status` enum('active','deleted') NOT NULL DEFAULT 'active',
-  PRIMARY KEY (`id`),
-  KEY `upload_date_idx` (`upload_date`),
-  KEY `user_id_idx` (`user_id`),
-  KEY `status_idx` (`status`)
+  `user_id` int(11) DEFAULT NULL,
+  `file_path` varchar(512) NOT NULL,
+  `status` enum('active','deleted') NOT NULL DEFAULT 'active'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -52,11 +43,23 @@ CREATE TABLE `upload` (
 --
 
 --
--- Set auto-increment for table `upload`
+-- Indexes for table `upload`
+--
+ALTER TABLE `upload`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `upload_date_idx` (`upload_date`),
+  ADD KEY `user_id_idx` (`user_id`),
+  ADD KEY `status_idx` (`status`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `upload`
 --
 ALTER TABLE `upload`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
