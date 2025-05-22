@@ -55,6 +55,11 @@ $years = $conn->query($yearsQuery);
     <title>Files Repository</title>    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <style>
+        *{
+            box-sizing: border-box;
+            text-decoration: none;
+            list-style: none;        
+        }
         .card {
             transition: transform 0.2s ease-in-out;
             border: none;
@@ -83,24 +88,13 @@ $years = $conn->query($yearsQuery);
 </head>
 
 <body>
-    <div class="container mt-5">        <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="container mt-5">        <div class="mb-4">
             <h2>Document Repository</h2>
-            <?php
-            // Determine the correct back link based on the referring page or role
-            $backUrl = isset($_SESSION['role']) && $_SESSION['role'] === 'admin' 
-                ? "../Admin_Page/admin.php" 
-                : "../User_Page/user.php";
-            $dashboardType = isset($_SESSION['role']) && $_SESSION['role'] === 'admin' ? 'Admin' : 'User';
-            ?>
-            <a href="<?php echo $backUrl; ?>" class="btn btn-secondary">
-                <i class="bi bi-arrow-left me-2"></i>Back to <?php echo $dashboardType; ?> Dashboard
-            </a>
-        </div>
-
-        <!-- Filters -->
+        </div><!-- Filters -->
         <div class="row mb-4">
             <div class="col-md-4">
-                <form action="" method="GET" class="d-flex gap-2">
+                <form method="GET" class="d-flex gap-2">
+                    <input type="hidden" name="files_repository" value="1">
                     <select name="category" class="form-select">
                         <option value="">All Categories</option>
                         <?php while ($cat = $categories->fetch_assoc()): ?>

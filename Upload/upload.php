@@ -28,13 +28,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (!in_array($file_type, $allowed_types)) {
             $message = "Sorry, only JPG, JPEG, PNG, GIF, and PDF files are allowed.";
             $messageType = "danger";
-        } else {            // Get category and year for proper file path storage
-            $category = $_POST['category'] ?? null;
-            $year = null;
-
-            if (in_array($category, ['purchase_receipts', 'sales_invoices', 'petty_cash_reports'])) {
-                $year = $_POST['year'] ?? date('Y');
-            }
+        } else {            // Get category and year for proper file path storage            $category = $_POST['category'] ?? null;
+            $year = $_POST['year'] ?? date('Y');
 
             // Set up target directory structure
             $target_subdir = $target_dir . $category . '/';
@@ -160,12 +155,20 @@ if (isset($_SESSION['message']) && isset($_SESSION['messageType'])) {
             </div>
             <button type="submit" class="btn">Upload File</button>
         </form>
-    </div> <!-- Alert popup for messages -->
-    <?php if (!empty($message)): ?>
+    </div> <!-- Alert popup for messages -->    <?php if (!empty($message)): ?>
         <div class="alert alert-<?php echo $messageType; ?> alert-popup alert-dismissible fade show" role="alert">
             <?php echo $message; ?>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
+        <script>
+            setTimeout(function() {
+                var alertElement = document.querySelector('.alert-popup');
+                if (alertElement) {
+                    var bsAlert = new bootstrap.Alert(alertElement);
+                    bsAlert.close();
+                }
+            }, 5000);
+        </script>
     <?php endif; ?>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -178,12 +181,10 @@ if (isset($_SESSION['message']) && isset($_SESSION['messageType'])) {
                 setTimeout(function () {
                     $('.alert-popup').fadeOut('slow');
                 }, 5000);
-            }
-
-            // Handle category selection to show/hide year field
+            }            // Show year field for all categories
             $('#category').change(function () {
                 const category = $(this).val();
-                if (category === 'purchase_receipts' || category === 'sales_invoices' || category === 'petty_cash_reports') {
+                if (category) {
                     $('#yearField').show();
                     $('#year').prop('required', true);
                 } else {
