@@ -10,7 +10,7 @@ hamburger.addEventListener("click", function() {
 new Chart(document.getElementById("bar-chart-grouped"), {
     type: 'bar',
     data: {
-      labels: ["1900", "1950", "1999", "2050"],
+      labels: ["2022", "2023", "2024", "2025", "2026"],
       datasets: [
         {
           label: "File",
@@ -19,6 +19,11 @@ new Chart(document.getElementById("bar-chart-grouped"), {
         }, {
           label: "Document",
           backgroundColor: "#8e5ea2",
+          data: [408,547,675,734]
+        }, 
+        {
+          label: "Uploads",
+          backgroundColor: "#8e5fe1",
           data: [408,547,675,734]
         }
       ]

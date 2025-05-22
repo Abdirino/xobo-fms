@@ -1,0 +1,2 @@
+ALTER TABLE users ADD COLUMN created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+UPDATE users SET created_at = NOW() WHERE created_at IS NULL;

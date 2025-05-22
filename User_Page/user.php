@@ -43,12 +43,6 @@ if (!isset($_SESSION['email'])) {
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="user.php?manage_users" class="sidebar-link">
-                        <i class='bx bxs-user-detail'></i>
-                        <span>Manage Users</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
                     <a href="user.php?files_repository" class="sidebar-link">
                         <i class='bx bxs-hdd'></i>
                         <span>Files Repository</span>
@@ -64,12 +58,6 @@ if (!isset($_SESSION['email'])) {
                     <a href="user.php?audit_logs" class="sidebar-link">
                         <i class='bx bxl-blogger'></i>
                         <span>Audit Logs</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="" class="sidebar-link">
-                        <i class='bx bx-search-alt'></i>
-                        <span>Search Files</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
@@ -228,6 +216,31 @@ if (!isset($_SESSION['email'])) {
                     <?php } ?>
                 </div>
             </main>
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row text-body-secondary text-primary">
+                        <div class="col-6 text-start">
+                            <a href="#" class="text-body-secondary text-primary">
+                                <strong>XoboFMS</strong>
+                            </a>
+                            <p>Beta Version 1.0</p>
+                        </div>
+                        <div class="col-6 text-end text-body-secondary d-none d-md-block">
+                            <ul class="list-inline mb-0">
+                                <li class="list-inline-item">
+                                    <a href="#" class="text-body-secondary">© 2025 XOBO</a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="#" class="text-body-secondary">System Status</a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="#" class="text-body-secondary">Privacy Policy</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </footer>
 
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"

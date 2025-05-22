@@ -15,8 +15,13 @@ if (!isset($_SESSION['email'])) {
 $category = isset($_GET['category']) ? $_GET['category'] : null;
 $year = isset($_GET['year']) ? $_GET['year'] : null;
 
-// Prepare the SQL query based on filters
-$sql = "SELECT * FROM upload WHERE 1=1";
+// Define accessible categories based on user role
+$accessible_categories = $_SESSION['role'] === 'admin' 
+    ? ['purchase_receipts', 'sales_invoices', 'petty_cash_reports', 'client_agreements', 'partner_agreements']
+    : ['client_agreements', 'partner_agreements'];
+
+// Prepare the SQL query based on filters and permissions
+$sql = "SELECT * FROM upload WHERE category IN ('" . implode("','", $accessible_categories) . "')";
 if ($category) {
     $sql .= " AND category = ?";
 }
@@ -52,8 +57,9 @@ $years = $conn->query($yearsQuery);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Files Repository</title>    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <title>Files Repository</title>   
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css"> -->
     <style>
         *{
             box-sizing: border-box;
@@ -112,11 +118,9 @@ $years = $conn->query($yearsQuery);
                                 <?php echo htmlspecialchars($y['year']); ?>
                             </option>
                         <?php endwhile; ?>
-                    </select>
-                    <button type="submit" class="btn btn-primary">Filter</button>
-                    <?php if ($category || $year): ?>
-                        <a href="files.php" class="btn btn-secondary">Clear</a>
-                    <?php endif; ?>
+                    </select>                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-funnel"></i> Filter
+                    </button>
                 </form>
             </div>
         </div>

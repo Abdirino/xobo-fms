@@ -14,8 +14,20 @@ $target_dir = "../uploads/";
 
 // Check if the request is a POST request (form submission)
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Check user permissions
+    $allowed_categories = $_SESSION['role'] === 'admin' 
+        ? ['purchase_receipts', 'sales_invoices', 'petty_cash_reports', 'client_agreements', 'partner_agreements']
+        : ['client_agreements', 'partner_agreements'];
+
     // Check if a file was uploaded and there are no upload errors
     if (isset($_FILES["file"]) && $_FILES["file"]["error"] == 0) {
+        // Validate category
+        if (!isset($_POST['category']) || !in_array($_POST['category'], $allowed_categories)) {
+            $message = "You don't have permission to upload to this category.";
+            $messageType = "danger";
+            die($message);
+        }
+
         // File was uploaded successfully
         $filename = $_FILES["file"]["name"];
         $target_file = $target_dir . basename($filename);
@@ -119,6 +131,18 @@ if (isset($_SESSION['message']) && isset($_SESSION['messageType'])) {
             min-width: 300px;
             z-index: 1050;
         }
+        .btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -127,14 +151,25 @@ if (isset($_SESSION['message']) && isset($_SESSION['messageType'])) {
         <h1>Upload Files</h1>
         <form action="../Admin_Page/admin.php?upload" method="POST" enctype="multipart/form-data" id="uploadForm">
             <div class="mb-3">
-                <label for="category" class="form-label">Document Category</label>
-                <select class="form-select" name="category" id="category" required>
+                <label for="category" class="form-label">Document Category</label>                <select class="form-select" name="category" id="category" required>
                     <option value="">Select a category</option>
-                    <option value="purchase_receipts">Purchase Receipts</option>
-                    <option value="sales_invoices">Sales Invoices</option>
-                    <option value="petty_cash_reports">Petty Cash Reports</option>
-                    <option value="client_agreements">Client Agreements</option>
-                    <option value="partner_agreements">Partner Agreements</option>
+                    <?php
+                    $allowed_categories = $_SESSION['role'] === 'admin' 
+                        ? ['purchase_receipts', 'sales_invoices', 'petty_cash_reports', 'client_agreements', 'partner_agreements']
+                        : ['client_agreements', 'partner_agreements'];
+                    
+                    $category_labels = [
+                        'purchase_receipts' => 'Purchase Receipts',
+                        'sales_invoices' => 'Sales Invoices',
+                        'petty_cash_reports' => 'Petty Cash Reports',
+                        'client_agreements' => 'Client Agreements',
+                        'partner_agreements' => 'Partner Agreements'
+                    ];
+
+                    foreach ($allowed_categories as $cat) {
+                        echo '<option value="' . $cat . '">' . $category_labels[$cat] . '</option>';
+                    }
+                    ?>
                 </select>
             </div>
             <div class="mb-3" id="yearField" style="display: none;">
