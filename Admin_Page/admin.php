@@ -17,6 +17,7 @@ require_once('../connect_db.php');
     <link rel="website" type="png" href="Xobo-Logo.jpeg">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <title>Admin Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="admin.css">
@@ -142,7 +143,8 @@ require_once('../connect_db.php');
                 <div class="container-fluid">
                     <?php
                     if (isset($_GET['upload'])) {
-                        include('../Upload/upload.php');                    } elseif (isset($_GET['manage_users'])) {
+                        include('../Upload/upload.php');
+                    } elseif (isset($_GET['manage_users'])) {
                         include('../ManageUser/manage_user.php');
                     } elseif (isset($_GET['files_repository'])) {
                         include('../Files/files.php');
@@ -213,82 +215,135 @@ require_once('../connect_db.php');
                                         </div>
                                     </div>
                                 </div>
-                            </div>                            <div class="row">
-                                <div class="col-12 col-md-5">
-                                    <h3 class="fw-bold fs-4 my-3">
-                                        Document Overview
-                                    </h3>
-                                    <canvas id="bar-chart-grouped" width="800" height="450"></canvas>
-                                    <?php
-                                    // Get document counts by category and year
-                                    $chartQuery = "SELECT category, YEAR(created_at) as year, COUNT(*) as count 
-                                                 FROM upload 
-                                                 WHERE YEAR(created_at) >= YEAR(NOW()) - 1
-                                                 GROUP BY category, YEAR(created_at)
-                                                 ORDER BY year DESC, category";
-                                    $chartResult = $conn->query($chartQuery);
-                                    $chartData = [];
-                                    while ($row = $chartResult->fetch_assoc()) {
-                                        $chartData[$row['year']][$row['category']] = $row['count'];
-                                    }
-                                    ?>
-                                    <script>
-                                        new Chart(document.getElementById("bar-chart-grouped"), {
-                                            type: 'bar',
-                                            data: {
-                                                labels: <?php echo json_encode(array_keys($chartData)); ?>,
-                                                datasets: [
-                                                    {
-                                                        label: "Documents",
-                                                        backgroundColor: "#3e95cd",
-                                                        data: <?php echo json_encode(array_values($chartData)); ?>
-                                                    }
-                                                ]
-                                            },
-                                            options: {
-                                                title: {
-                                                    display: true,
-                                                    text: 'Document Uploads by Year'
-                                                }
-                                            }
-                                        });
-                                    </script>
-                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-12 col-md-7">
                                     <h3 class="fw-bold fs-4 my-3">Users</h3>
                                     <table class="table table-striped">
                                         <thead>
                                             <tr class="highlight">
-                                                <th scope="col">#</th>
-                                                <th scope="col">First</th>
-                                                <th scope="col">Last</th>
-                                                <th scope="col">Handle</th>                                    </tr>
+                                                <th>Name</th>
+                                                <th>Email</th>
+                                                <th>Role</th>
+                                                <th>Joined Date</th>
+                                                <th>Status</th>
+                                                <th>Actions</th>
+                                            </tr>
                                         </thead>
                                         <tbody>
                                             <?php
-                                            $users_query = "SELECT name, email, role, created_at FROM users ORDER BY created_at DESC LIMIT 6";
+                                            // Add status column if it doesn't exist
+                                            $checkColumn = $conn->query("SHOW COLUMNS FROM users LIKE 'status'");
+                                            if ($checkColumn->num_rows === 0) {
+                                                $conn->query("ALTER TABLE users ADD COLUMN status ENUM('active', 'inactive') DEFAULT 'active'");
+                                            }
+
+                                            $users_query = "SELECT id, name, email, role, created_at, status FROM users ORDER BY created_at DESC LIMIT 6";
                                             $users_result = $conn->query($users_query);
                                             while ($user = $users_result->fetch_assoc()):
-                                            ?>
-                                            <tr>
-                                                <td>
-                                                    <div class="d-flex align-items-center">
-                                                        <i class="bi bi-person-circle me-2"></i>
-                                                        <?php echo htmlspecialchars($user['name']); ?>
-                                                    </div>
-                                                </td>
-                                                <td><?php echo htmlspecialchars($user['email']); ?></td>
-                                                <td>
-                                                    <span class="badge <?php echo $user['role'] === 'admin' ? 'bg-primary' : 'bg-secondary'; ?>">
-                                                        <?php echo ucfirst($user['role']); ?>
-                                                    </span>
-                                                </td>
-                                                <td><?php echo date('M d, Y', strtotime($user['created_at'])); ?></td>
-                                            </tr>
+                                                ?>
+                                                <tr>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <i class="bi bi-person-circle me-2"></i>
+                                                            <?php echo htmlspecialchars($user['name']); ?>
+                                                        </div>
+                                                    </td>
+                                                    <td><?php echo htmlspecialchars($user['email']); ?></td>
+                                                    <td>
+                                                        <span
+                                                            class="badge <?php echo $user['role'] === 'admin' ? 'bg-primary' : 'bg-secondary'; ?>">
+                                                            <?php echo ucfirst($user['role']); ?>
+                                                        </span>
+                                                    </td>
+                                                    <td><?php echo date('M d, Y', strtotime($user['created_at'])); ?></td>
+                                                    <td>
+                                                        <span
+                                                            class="badge <?php echo $user['status'] === 'active' ? 'bg-success' : 'bg-danger'; ?>">
+                                                            <?php echo ucfirst($user['status']); ?>
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        <div class="btn-group">
+                                                            <button type="button" class="btn btn-sm btn-info me-1"
+                                                                onclick="viewUser(<?php echo $user['id']; ?>)">
+                                                                <i class="bx bx-show"></i>
+                                                            </button>
+                                                            <?php if ($user['role'] !== 'admin'): ?>
+                                                                <button type="button"
+                                                                    class="btn btn-sm <?php echo $user['status'] === 'active' ? 'btn-warning' : 'btn-success'; ?> me-1"
+                                                                    onclick="toggleUserStatus(<?php echo $user['id']; ?>, '<?php echo $user['status']; ?>')">
+                                                                    <i
+                                                                        class="bx <?php echo $user['status'] === 'active' ? 'bx-pause' : 'bx-play'; ?>"></i>
+                                                                </button>
+                                                                <button type="button" class="btn btn-sm btn-danger"
+                                                                    onclick="deleteUser(<?php echo $user['id']; ?>)">
+                                                                    <i class="bx bx-trash"></i>
+                                                                </button>
+                                                            <?php endif; ?>
+                                                        </div>
+                                                    </td>
+                                                </tr>
                                             <?php endwhile; ?>
                                         </tbody>
                                     </table>
                                 </div>
+
+                                <div class="col-12 col-md-5">
+                                    <h3 class="fw-bold fs-4 my-3">
+                                        Document Overview
+                                    </h3>
+                                    <canvas id="bar-chart-grouped" width="800" height="450"></canvas> <?php
+                                    // Get available years from upload table
+                                    $yearsQuery = "SELECT DISTINCT YEAR(created_at) as year 
+                                                 FROM upload 
+                                                 ORDER BY year DESC 
+                                                 LIMIT 5";
+                                    $yearsResult = $conn->query($yearsQuery);
+                                    $years = [];
+                                    while ($row = $yearsResult->fetch_assoc()) {
+                                        $years[] = $row['year'];
+                                    }
+
+                                    // Get categories and their document counts per year
+                                    $categories = [
+                                        'purchase_receipts',
+                                        'sales_invoices',
+                                        'petty_cash_reports',
+                                        'client_agreements',
+                                        'partner_agreements'
+                                    ];
+
+                                    $categoryLabels = [
+                                        'purchase_receipts' => 'Purchase Receipts',
+                                        'sales_invoices' => 'Sales Invoices',
+                                        'petty_cash_reports' => 'Petty Cash Reports',
+                                        'client_agreements' => 'Client Agreements',
+                                        'partner_agreements' => 'Partner Agreements'
+                                    ];
+
+                                    $chartData = ['years' => $years, 'categories' => []];
+
+                                    foreach ($categories as $category) {
+                                        $categoryData = ['name' => $categoryLabels[$category], 'data' => []];
+                                        foreach ($years as $year) {
+                                            $countQuery = "SELECT COUNT(*) as count 
+                                                         FROM upload 
+                                                         WHERE category = '$category' 
+                                                         AND YEAR(created_at) = $year";
+                                            $countResult = $conn->query($countQuery);
+                                            $count = $countResult->fetch_assoc()['count'];
+                                            $categoryData['data'][] = (int) $count;
+                                        }
+                                        $chartData['categories'][] = $categoryData;
+                                    }
+                                    ?>
+                                    <script>
+                                        // Initialize the chart with the PHP data
+                                        initializeChart(<?php echo json_encode($chartData); ?>);
+                                    </script>
+                                </div>
+
                             </div>
                         </div>
                     <?php } ?>
@@ -299,7 +354,9 @@ require_once('../connect_db.php');
                     <div class="row text-body-secondary text-primary">
                         <div class="col-6 text-start">
                             <a href="#" class="text-body-secondary text-bold text-primary flex-row align-items-center">
-                                <strong><h5>XoboFMS</h5></strong>
+                                <strong>
+                                    <h5>XoboFMS</h5>
+                                </strong>
                             </a>
                         </div>
                         <div class="col-6 text-end text-body-secondary d-none d-md-block">

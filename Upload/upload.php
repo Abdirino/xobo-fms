@@ -17,15 +17,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check user permissions
     $allowed_categories = $_SESSION['role'] === 'admin' 
         ? ['purchase_receipts', 'sales_invoices', 'petty_cash_reports', 'client_agreements', 'partner_agreements']
-        : ['client_agreements', 'partner_agreements'];
-
-    // Check if a file was uploaded and there are no upload errors
-    if (isset($_FILES["file"]) && $_FILES["file"]["error"] == 0) {
+        : ['client_agreements', 'partner_agreements'];    // Check if a file was uploaded and there are no upload errors
+    if (isset($_FILES["file"]) && $_FILES["file"]["error"] == 0 && isset($_POST['category'])) {
+        $category = $_POST['category'];
         // Validate category
-        if (!isset($_POST['category']) || !in_array($_POST['category'], $allowed_categories)) {
+        if (!in_array($category, $allowed_categories)) {
             $message = "You don't have permission to upload to this category.";
             $messageType = "danger";
-            die($message);
+            $_SESSION['message'] = $message;
+            $_SESSION['messageType'] = $messageType;
+            header("Location: ../Admin_Page/admin.php?upload");
+            exit();
         }
 
         // File was uploaded successfully

@@ -131,7 +131,7 @@ a.sidebar-link:hover{
 .card:hover{
     background-color: #293b5f;
     color: #fff;
-    transform: translateY(-10.5px);
+    transform: translateY(-3px);
 }
 
 .table>thead tr{
